@@ -1,6 +1,6 @@
 # Wolfram Evaluation Function Base Image
 
-This is the base image which is intended to be used by evaluation functions written in Wolfram Language. It is based on the `wolframresearch/wolframengine` image and adds the necessary components to run evaluation functions written in Wolfram Language.
+This is the base image which is intended to be used by evaluation functions written in Wolfram Language. It is based on the [`wolframresearch/wolframengine`](https://hub.docker.com/r/wolframresearch/wolframengine) image and adds the necessary components to run evaluation functions written in Wolfram Language.
 
 ## Usage
 
