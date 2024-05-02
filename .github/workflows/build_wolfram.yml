@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build Wolfram Image
 
 on:
   push:
@@ -6,15 +6,22 @@ on:
       - "README.md"
     branches:
       - main
+    paths:
+      - "wolfram/**"
   pull_request:
+    paths:
+      - "wolfram/**"
 
 jobs:
   build:
-    name: Build Docker Image
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: ${{ github.event_name == 'pull_request' || github.ref_name != github.event.repository.default_branch }}
+    strategy:
+      matrix:
+        wolfram_version: [13.3]
     permissions:
       contents: read
       packages: write
@@ -44,20 +51,23 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
+          flavor: |
+            suffix=-${{ matrix.wolfram_version }}
           tags: |
             type=schedule
             type=ref,event=branch
             type=ref,event=tag
             type=ref,event=pr
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ matrix.wolfram_version }},suffix=,enable={{is_default_branch}}
+            type=raw,value=latest,suffix=,enable=${{ github.ref_name == github.event.repository.default_branch && matrix.wolfram_version == '13.3' }}
             type=edge,branch=main
           images: |
-            ghcr.io/${{ github.repository }}
+            ghcr.io/${{ github.repository }}/wolfram
 
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: wolfram
           push: ${{ (github.event_name == 'push' && (github.ref_name == github.event.repository.default_branch || github.ref_type == 'tag')) || github.event_name == 'pull_request' }}
           platforms: ${{ github.ref_name == github.event.repository.default_branch && 'linux/amd64,linux/arm64' || 'linux/amd64' }}
           provenance: false
@@ -65,3 +75,5 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max,ignore-error=true
+          build-args: |
+            WOLFRAM_ENGINE_VERSION=${{ matrix.wolfram_version }}
