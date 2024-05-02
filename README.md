@@ -6,4 +6,6 @@ All base images come with [`shimmy`](https://github.com/lambda-feedback/shimmy) 
 
 ## Images
 
-- [Wolfram](./wolfram)
+This repository contains the following images:
+
+- [Wolfram](./wolfram): Base image for evaluation functions written in Wolfram Language.
