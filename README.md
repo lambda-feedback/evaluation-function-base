@@ -18,7 +18,7 @@ The images in this repository are not intended to be used directly. Instead, the
 A Dockerfile for a hypothetical evaluation function written in `bash` could look like this:
 
 ```Dockerfile
-FROM ghcr.io/lambda-feedback/evaluation-function-image/scratch:latest
+FROM ghcr.io/lambda-feedback/evaluation-function-base/scratch:latest
 
 COPY ./eval.sh /app/eval.sh
 

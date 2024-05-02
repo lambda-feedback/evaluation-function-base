@@ -9,7 +9,7 @@ This image is not meant to be run directly. Instead, it ought to be used as a ba
 Here is an example of a `Dockerfile` that uses this image as a base:
 
 ```Dockerfile
-FROM ghcr.io/lambda-feedback/evaluation-function-image/wolfram:latest
+FROM ghcr.io/lambda-feedback/evaluation-function-base/wolfram:latest
 
 COPY ./function.wl /app/function.wl
 
