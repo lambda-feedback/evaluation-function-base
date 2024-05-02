@@ -1,4 +1,5 @@
 ARG SHIMMY_VERSION=latest
+ARG WOLFRAM_ENGINE_VERSION=13.3
 
 FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} as shimmy
 
