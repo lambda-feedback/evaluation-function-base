@@ -1,4 +1,7 @@
+ARG SHIMMY_VERSION=latest
 ARG WOLFRAM_ENGINE_VERSION=13.3
+
+FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} as shimmy
 
 FROM wolframresearch/wolframengine:${WOLFRAM_ENGINE_VERSION}
 
@@ -21,6 +24,9 @@ COPY ./entrypoint.sh /entrypoint.sh
 
 # add wstp server to path
 ENV PATH=$PATH:/usr/local/Wolfram/WolframEngine/${WOLFRAM_ENGINE_VERSION}/SystemFiles/Links/WSTPServer
+
+# add shimmy
+COPY --from=shimmy /shimmy /usr/local/bin/shimmy
 
 # add entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
