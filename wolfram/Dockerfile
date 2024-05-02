@@ -1,7 +1,5 @@
 ARG SHIMMY_VERSION=latest
 
-FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} as shimmy
-
 FROM wolframresearch/wolframengine:${WOLFRAM_ENGINE_VERSION}
 
 USER root
@@ -25,7 +23,7 @@ COPY ./entrypoint.sh /entrypoint.sh
 ENV PATH=$PATH:/usr/local/Wolfram/WolframEngine/${WOLFRAM_ENGINE_VERSION}/SystemFiles/Links/WSTPServer
 
 # add shimmy
-COPY --from=shimmy /shimmy /usr/local/bin/shimmy
+COPY --from=ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} /shimmy /usr/local/bin/shimmy
 
 # add entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
