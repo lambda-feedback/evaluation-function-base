@@ -6,6 +6,8 @@ This is the base image which is intended to be used by evaluation functions writ
 
 This image is not meant to be run directly. Instead, it ought to be used as a base image for evaluation functions written in Wolfram Language. The evaluation function should be placed in the `/app` directory.
 
+The image comes with [`shimmy`](https://github.com/lambda-feedback/shimmy) pre-installed. Shimmy is an application that allows to run arbitrary evaluation functions in any containerized environment, including AWS Lambda.
+
 Here is an example of a `Dockerfile` that uses this image as a base:
 
 ```Dockerfile
