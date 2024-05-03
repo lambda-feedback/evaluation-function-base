@@ -13,5 +13,5 @@ FROM ghcr.io/lambda-feedback/evaluation-function-base/wolfram:latest
 
 COPY ./function.wl /app/function.wl
 
-CMD ["shimmy", "-i", "file", "-c", "wolframscript", "-a", "/app/function.wl"]
+CMD ["shimmy", "-i", "file", "-c", "wolframscript", "-a", "-f", "-a", "/app/function.wl"]
 ```
