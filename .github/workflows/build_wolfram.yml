@@ -10,6 +10,12 @@ on:
     paths:
       - "wolfram/**"
   workflow_dispatch:
+    inputs:
+      no-cache:
+        description: "Disable cache for build"
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   build:
@@ -73,6 +79,7 @@ jobs:
           provenance: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          no-cache: ${{ inputs.no-cache || false }}
           cache-from: type=gha
           cache-to: type=gha,mode=max,ignore-error=true
           build-args: |
