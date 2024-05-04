@@ -46,4 +46,4 @@ COPY --from=lambda-rie /usr/local/bin/aws-lambda-rie /usr/local/bin/aws-lambda-r
 # add entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD [ "shimmy", "serve" ]
+CMD [ "shimmy" ]

@@ -20,11 +20,11 @@ A Dockerfile for a hypothetical evaluation function written in `bash` could look
 ```Dockerfile
 FROM ghcr.io/lambda-feedback/evaluation-function-base/scratch:latest
 
+ENV FUNCTION_COMMAND="/app/eval.sh"
+
 COPY ./eval.sh /app/eval.sh
 
 RUN chmod +x /app/eval.sh
-
-CMD ["shimmy", "-c", "/app/eval.sh", "serve"]
 ```
 
 ## AWS Lambda
@@ -34,9 +34,9 @@ All base images in this repository are compatible with AWS Lambda. For local dev
 ```Dockerfile
 FROM ghcr.io/lambda-feedback/evaluation-function-base/scratch:latest
 
+ENV FUNCTION_COMMAND="/app/eval.sh"
+
 ENV AWS_LAMBDA_RIE=1
 
 # ...
-
-CMD ["shimmy", "-c", "/app/eval.sh", "handle"]
 ```
