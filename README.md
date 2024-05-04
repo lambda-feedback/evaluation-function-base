@@ -24,5 +24,19 @@ COPY ./eval.sh /app/eval.sh
 
 RUN chmod +x /app/eval.sh
 
-CMD ["shimmy", "-c", "/app/eval.sh"]
+CMD ["shimmy", "-c", "/app/eval.sh", "serve"]
+```
+
+## AWS Lambda
+
+All base images in this repository are compatible with AWS Lambda. For local development, they also include the [AWS Lambda runtime interface emulator](https://github.com/aws/aws-lambda-runtime-interface-emulator). This allows to test the evaluation function locally before deploying it to AWS Lambda. The emulator can be enabled by setting the `AWS_LAMBDA_RIE` environment variable to `1`.
+
+```Dockerfile
+FROM ghcr.io/lambda-feedback/evaluation-function-base/scratch:latest
+
+ENV AWS_LAMBDA_RIE=1
+
+# ...
+
+CMD ["shimmy", "-c", "/app/eval.sh", "handle"]
 ```
