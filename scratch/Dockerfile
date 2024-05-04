@@ -25,6 +25,8 @@ RUN case $(uname -m) in \
 
 FROM base as final
 
+ENV LOG_FORMAT="production"
+
 # add shimmy
 COPY --from=shimmy /shimmy /usr/local/bin/shimmy
 
@@ -35,3 +37,5 @@ COPY --from=lambda-rie /usr/local/bin/aws-lambda-rie /usr/local/bin/aws-lambda-r
 COPY ./entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
+
+CMD [ "shimmy" ]

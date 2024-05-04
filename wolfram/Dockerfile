@@ -20,6 +20,8 @@ RUN case $(uname -m) in \
 
 FROM wolframresearch/wolframengine:${WOLFRAM_ENGINE_VERSION}
 
+ENV LOG_FORMAT="production"
+
 USER root
 
 # TODO: look into why this is necessary
@@ -43,3 +45,5 @@ COPY --from=lambda-rie /usr/local/bin/aws-lambda-rie /usr/local/bin/aws-lambda-r
 
 # add entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
+
+CMD [ "shimmy" ]
