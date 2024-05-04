@@ -38,4 +38,4 @@ COPY ./entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 
-CMD [ "shimmy" ]
+CMD [ "shimmy", "serve" ]
