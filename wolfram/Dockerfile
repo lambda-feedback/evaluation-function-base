@@ -31,9 +31,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # set common workdir
 WORKDIR /app
 
-# add entrypoint script
-COPY ./entrypoint.sh /entrypoint.sh
-
 # add wstp server to path
 ENV PATH=$PATH:/usr/local/Wolfram/WolframEngine/${WOLFRAM_ENGINE_VERSION}/SystemFiles/Links/WSTPServer
 
@@ -44,6 +41,9 @@ COPY --from=shimmy /shimmy /usr/local/bin/shimmy
 COPY --from=lambda-rie /usr/local/bin/aws-lambda-rie /usr/local/bin/aws-lambda-rie
 
 # add entrypoint script
-ENTRYPOINT ["/entrypoint.sh"]
+COPY ./entrypoint.sh /entrypoint.sh
+
+# add entrypoint script
+ENTRYPOINT [ "/entrypoint.sh" ]
 
 CMD [ "shimmy" ]
