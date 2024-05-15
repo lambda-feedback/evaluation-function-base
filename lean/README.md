@@ -9,11 +9,15 @@ This image is not meant to be run directly. Instead, it ought to be used as a ba
 Here is an example of a `Dockerfile` that uses this image as a base:
 
 ```Dockerfile
-FROM ghcr.io/lambda-feedback/evaluation-function-base/lean:latest
+FROM ghcr.io/lambda-feedback/evaluation-function-base/lean:latest as build
 
 COPY . .
 
 RUN lake build
 
-CMD ["shimmy"]
+FROM ghcr.io/lambda-feedback/evaluation-function-base/scratch:latest
+
+COPY --from=build /app/.lake/build/bin/evaluation_function /app/evaluation_function
+
+ENV FUNCTION_COMMAND="/app/evaluation_function"
 ```
