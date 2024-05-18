@@ -22,9 +22,20 @@ FROM wolframresearch/wolframengine:${WOLFRAM_ENGINE_VERSION}
 
 ENV LOG_FORMAT="production"
 
+# Configure Wolfram to use /tmp/home as the home directory
+ENV WOLFRAM_USERBASEDIRECTORY="/tmp/home"
+ENV WOLFRAM_USERDOCUMENTSDIRECTORY="/tmp/home/Documents"
+ENV WOLFRAM_DOCUMENTSDIRECTORY="/tmp/home/Documents"
+ENV MATHEMATICA_USERBASE="/tmp/home/.WolframEngine"
+ENV MATHEMATICAPLAYER_USERBASE="/tmp/home/.WolframEngine"
+ENV WOLFRAMSCRIPT_CONFIGURATIONPATH="/tmp/home/.config/Wolfram/WolframScript/WolframScript.conf"
+ENV WOLFRAMSCRIPT_AUTHENTICATIONPATH="/tmp/home/.cache/Wolfram/WolframScript"
+ENV WOLFRAM_CACHEBASE="/tmp/home/.cache/Wolfram"
+ENV WOLFRAM_LOG_DIRECTORY="/tmp/home/.Wolfram/Logs"
+
 USER root
 
-# TODO: look into why this is necessary
+# TODO: look into why / if this is necessary
 ENV TZ=Europe/London
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
