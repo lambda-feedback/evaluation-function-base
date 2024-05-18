@@ -20,6 +20,8 @@ RUN case $(uname -m) in \
 
 FROM wolframresearch/wolframengine:${WOLFRAM_ENGINE_VERSION}
 
+ENV WOLFRAM_ENGINE_VERSION=${WOLFRAM_ENGINE_VERSION}
+
 ENV LOG_FORMAT="production"
 
 # Configure Wolfram to use /tmp/home as the home directory
