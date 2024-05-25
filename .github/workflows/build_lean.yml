@@ -28,7 +28,7 @@ jobs:
       cancel-in-progress: ${{ github.event_name == 'pull_request' || github.ref_name != github.event.repository.default_branch }}
     strategy:
       matrix:
-        lean_version: [4.7.0]
+        lean_version: [4.7.0, 4.8.0-rc2]
     permissions:
       contents: read
       packages: write
