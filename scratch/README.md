@@ -4,7 +4,7 @@ This is a minimal base image which can be used with arbitrary evaluation functio
 
 ## Usage
 
-This image is not meant to be run directly. Instead, it ought to be used as a base image for evaluation functions written in Wolfram Language. The evaluation function should be placed in the `/app` directory.
+This image is not meant to be run directly. Instead, it ought to be used as a base image for arbitrary evaluation functions. The evaluation function should be placed in the `/app` directory.
 
 Here is an example of a `Dockerfile` that uses this image as a base:
 
