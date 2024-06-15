@@ -1,4 +1,4 @@
-name: Build Scratch Image
+name: Build Python Image
 
 on:
   push:
