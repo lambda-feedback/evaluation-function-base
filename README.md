@@ -10,6 +10,8 @@ This repository contains the following images:
 
 - [Scratch](./scratch): Base image for evaluation functions written in arbitrary languages.
 - [Wolfram](./wolfram): Base image for evaluation functions written in Wolfram Language.
+- [Lean] (./lean): Base image for evaluation functions written in Lean.
+- [Python](./python): Base image for evaluation functions written in Python.
 
 ## Usage
 
