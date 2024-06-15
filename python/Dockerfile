@@ -9,12 +9,13 @@ FROM python:${PYTHON_VERSION}-slim-${DEBIAN_VERSION} as base
 # set common workdir
 WORKDIR /app
 
-FROM base as lambda-rie
-
-# Install curl
+# Install git so we can install python packages from git repositories
 RUN apt-get update && apt-get install -y \
+    git \
     curl \
     && rm -rf /var/lib/apt/lists/*
+
+FROM base as lambda-rie
 
 # Install the AWS Lambda Runtime Interface Emulator
 RUN case $(uname -m) in \
@@ -25,6 +26,11 @@ RUN case $(uname -m) in \
     chmod +x /usr/local/bin/aws-lambda-rie
 
 FROM base
+
+# Install git so we can install python packages from git repositories
+RUN apt-get update && apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
 ENV LOG_FORMAT="production"
 

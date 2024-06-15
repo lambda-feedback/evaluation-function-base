@@ -1,14 +1,17 @@
+ARG DEBIAN_VERSION=bookworm
 ARG SHIMMY_VERSION=latest
 
 FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} as shimmy
 
-FROM debian:bookworm-slim as base
+FROM debian:${DEBIAN_VERSION}-slim as base
 
 # set common workdir
 WORKDIR /app
 
-# Install curl
+# curl & git is required to fetch the lean version specified in `lean-toolchain` if
+# it differs from `LEAN_VERSION`, and to fetch external lake dependencies.
 RUN apt-get update && apt-get install -y \
+    git \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
