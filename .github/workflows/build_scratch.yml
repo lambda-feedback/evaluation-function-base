@@ -6,9 +6,11 @@ on:
       - main
     paths:
       - "scratch/**"
+      - ".github/workflows/build_scratch.yml"
   pull_request:
     paths:
       - "scratch/**"
+      - ".github/workflows/build_scratch.yml"
   workflow_dispatch:
     inputs:
       no-cache:

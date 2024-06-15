@@ -6,9 +6,11 @@ on:
       - main
     paths:
       - "wolfram/**"
+      - ".github/workflows/build_wolfram.yml"
   pull_request:
     paths:
       - "wolfram/**"
+      - ".github/workflows/build_wolfram.yml"
   workflow_dispatch:
     inputs:
       no-cache:

@@ -6,9 +6,11 @@ on:
       - main
     paths:
       - "python/**"
+      - ".github/workflows/build_python.yml"
   pull_request:
     paths:
       - "python/**"
+      - ".github/workflows/build_python.yml"
   workflow_dispatch:
     inputs:
       no-cache:

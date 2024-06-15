@@ -6,9 +6,11 @@ on:
       - main
     paths:
       - "lean/**"
+      - ".github/workflows/build_lean.yml"
   pull_request:
     paths:
       - "lean/**"
+      - ".github/workflows/build_lean.yml"
   workflow_dispatch:
     inputs:
       no-cache:
