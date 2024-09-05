@@ -67,7 +67,7 @@ jobs:
             type=ref,event=tag
             type=ref,event=pr
             type=raw,value=${{ matrix.wolfram_version }},suffix=,enable={{is_default_branch}}
-            type=raw,value=latest,suffix=,enable=${{ github.ref_name == github.event.repository.default_branch && matrix.wolfram_version == '13.3' }}
+            type=raw,value=latest,suffix=,enable=${{ github.ref_name == github.event.repository.default_branch && matrix.wolfram_version == '14.1' }}
             type=edge,branch=main
           images: |
             ghcr.io/${{ github.repository }}/wolfram
