@@ -30,7 +30,7 @@ jobs:
       cancel-in-progress: ${{ github.event_name == 'pull_request' || github.ref_name != github.event.repository.default_branch }}
     strategy:
       matrix:
-        wolfram_version: [13.3]
+        wolfram_version: [13.3, 14.1]
     permissions:
       contents: read
       packages: write
