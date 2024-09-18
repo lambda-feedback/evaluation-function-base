@@ -1,14 +1,14 @@
 ARG DEBIAN_VERSION=bookworm
 ARG SHIMMY_VERSION=latest
 
-FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} as shimmy
+FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} AS shimmy
 
-FROM debian:${DEBIAN_VERSION}-slim as base
+FROM debian:${DEBIAN_VERSION}-slim AS base
 
 # set common workdir
 WORKDIR /app
 
-FROM base as lambda-rie
+FROM base AS lambda-rie
 
 # Install curl
 RUN apt-get update && apt-get install -y \

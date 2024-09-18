@@ -1,9 +1,9 @@
 ARG SHIMMY_VERSION=latest
 ARG WOLFRAM_ENGINE_VERSION=13.3
 
-FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} as shimmy
+FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} AS shimmy
 
-FROM debian:bookworm-slim as lambda-rie
+FROM debian:bookworm-slim AS lambda-rie
 
 # Install curl
 RUN apt-get update && apt-get install -y \

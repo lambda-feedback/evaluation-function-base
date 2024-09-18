@@ -2,9 +2,9 @@ ARG DEBIAN_VERSION=bookworm
 ARG SHIMMY_VERSION=latest
 ARG PYTHON_VERSION=3.11
 
-FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} as shimmy
+FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} AS shimmy
 
-FROM python:${PYTHON_VERSION}-slim-${DEBIAN_VERSION} as base
+FROM python:${PYTHON_VERSION}-slim-${DEBIAN_VERSION} AS base
 
 # set common workdir
 WORKDIR /app
@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-FROM base as lambda-rie
+FROM base AS lambda-rie
 
 # Install the AWS Lambda Runtime Interface Emulator
 RUN case $(uname -m) in \
