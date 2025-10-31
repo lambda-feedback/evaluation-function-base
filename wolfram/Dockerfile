@@ -1,5 +1,5 @@
 ARG SHIMMY_VERSION=latest
-ARG WOLFRAM_ENGINE_VERSION=14.2
+ARG WOLFRAM_ENGINE_VERSION=14.3
 
 FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} AS shimmy
 
@@ -18,7 +18,8 @@ RUN case $(uname -m) in \
     curl -Lfo /usr/local/bin/aws-lambda-rie https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/${RIE_BINARY_NAME} && \
     chmod +x /usr/local/bin/aws-lambda-rie
 
-FROM wolframresearch/wolframengine:${WOLFRAM_ENGINE_VERSION}
+# FROM wolframresearch/wolframengine:${WOLFRAM_ENGINE_VERSION}
+FROM --platform=linux/amd64 jonmcloone/wwe:Lab143Aug19
 
 ARG WOLFRAM_ENGINE_VERSION
 

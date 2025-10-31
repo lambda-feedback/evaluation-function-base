@@ -1,4 +1,14 @@
 #!/bin/bash
+# Wolfram Licensing
+
+if [ ! -e /root/.Wolfram/Licensing/mathpass ]; then
+  /usr/local/Wolfram/Wolfram/14.3/Executables/WolframKernel <<EOF
+  $NAME
+  $COMPANY_NAME
+  $LICENSE_KEY
+  Quit[]
+EOF
+fi
 
 # Exit immediately if a command exits with a non-zero status.
 set -e
