@@ -1,0 +1,22 @@
+name: Create Release
+
+on:
+  repository_dispatch:
+    types: [release]
+
+jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.client_payload.shimmy_version }}
+          name: "Shimmy ${{ github.event.client_payload.shimmy_version }}"
+          generate_release_notes: true
