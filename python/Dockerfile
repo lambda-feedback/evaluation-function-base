@@ -1,5 +1,5 @@
 ARG DEBIAN_VERSION=bookworm
-ARG SHIMMY_VERSION=feature-mued
+ARG SHIMMY_VERSION=pr-17
 ARG PYTHON_VERSION=3.11
 
 FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} AS shimmy
