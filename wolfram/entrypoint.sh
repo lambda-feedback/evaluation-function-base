@@ -8,6 +8,10 @@ if [ ! -e /root/.Wolfram/Licensing/mathpass ]; then
   $LICENSE_KEY
   Quit[]
 EOF
+  if [ ! -e /root/.Wolfram/Licensing/mathpass ]; then
+    echo "ERROR: Wolfram licensing failed. Check that NAME, COMPANY_NAME, and LICENSE_KEY environment variables are set correctly." >&2
+    exit 1
+  fi
 fi
 
 # Exit immediately if a command exits with a non-zero status.
