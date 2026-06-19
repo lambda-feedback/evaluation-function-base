@@ -19,7 +19,7 @@ RUN case $(uname -m) in \
     chmod +x /usr/local/bin/aws-lambda-rie
 
 # FROM wolframresearch/wolframengine:${WOLFRAM_ENGINE_VERSION}
-FROM --platform=linux/amd64 jonmcloone/wwe:WE15-Jun2
+FROM --platform=linux/amd64 jonmcloone/wwe:Lab143Apr28
 
 ARG WOLFRAM_ENGINE_VERSION
 
