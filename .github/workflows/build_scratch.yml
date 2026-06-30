@@ -74,7 +74,7 @@ jobs:
             type=ref,event=pr
             type=raw,value=${{ inputs.version }},enable=${{ inputs.version != '' }}
             type=raw,value=${{ matrix.debian_version }},suffix=,enable={{is_default_branch}}
-            type=raw,value=latest,suffix=,enable=${{ github.ref_name == github.event.repository.default_branch && matrix.debian_version == 'bookworm' }}
+            type=raw,value=latest,suffix=,enable=${{ (github.ref_name == github.event.repository.default_branch || github.ref_type == 'tag') && matrix.debian_version == 'bookworm' }}
             type=edge,branch=main
           images: |
             ghcr.io/${{ github.repository }}/scratch
