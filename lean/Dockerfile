@@ -1,5 +1,5 @@
 ARG DEBIAN_VERSION=bookworm
-ARG SHIMMY_VERSION=latest
+ARG SHIMMY_VERSION=edge
 
 FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} AS shimmy
 
