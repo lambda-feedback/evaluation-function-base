@@ -2,7 +2,7 @@
 # Wolfram Licensing
 
 if [ ! -e /root/.Wolfram/Licensing/mathpass ]; then
-  /usr/local/Wolfram/Wolfram/14.3/Executables/WolframKernel <<EOF
+  /usr/local/Wolfram/Wolfram/15.0/Executables/WolframKernel <<EOF
   $NAME
   $COMPANY_NAME
   $LICENSE_KEY
