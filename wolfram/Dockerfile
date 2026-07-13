@@ -18,10 +18,9 @@ RUN case $(uname -m) in \
     curl -Lfo /usr/local/bin/aws-lambda-rie https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/${RIE_BINARY_NAME} && \
     chmod +x /usr/local/bin/aws-lambda-rie
 
-# FROM wolframresearch/wolframengine:${WOLFRAM_ENGINE_VERSION}
 FROM --platform=linux/amd64 ${WWE}
 
-ARG WOLFRAM_ENGINE_VERSION
+ARG WOLFRAM_ENGINE_VERSION=15.0
 
 ENV LOG_FORMAT="production"
 

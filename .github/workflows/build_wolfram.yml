@@ -34,9 +34,6 @@ jobs:
     concurrency:
       group: ${{ github.ref }}-wolfram
       cancel-in-progress: ${{ github.event_name == 'pull_request' || github.ref_name != github.event.repository.default_branch }}
-    strategy:
-      matrix:
-        wolfram_version: [13.3, 14.1]
     permissions:
       contents: read
       packages: write
@@ -65,16 +62,13 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          flavor: |
-            suffix=-${{ matrix.wolfram_version }}
           tags: |
             type=schedule
             type=ref,event=branch
             type=ref,event=tag
             type=ref,event=pr
             type=raw,value=${{ inputs.version }},enable=${{ inputs.version != '' }}
-            type=raw,value=${{ matrix.wolfram_version }},suffix=,enable={{is_default_branch}}
-            type=raw,value=latest,suffix=,enable=${{ (github.ref_name == github.event.repository.default_branch || github.ref_type == 'tag') && matrix.wolfram_version == '14.1' }}
+            type=raw,value=latest,enable=${{ github.ref_name == github.event.repository.default_branch || github.ref_type == 'tag' }}
             type=edge,branch=main
           images: |
             ghcr.io/${{ github.repository }}/wolfram
@@ -92,5 +86,3 @@ jobs:
           no-cache: ${{ inputs.no-cache || false }}
           cache-from: type=gha
           cache-to: type=gha,mode=max,ignore-error=true
-          build-args: |
-            WOLFRAM_ENGINE_VERSION=${{ matrix.wolfram_version }}
