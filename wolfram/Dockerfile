@@ -21,6 +21,7 @@ RUN case $(uname -m) in \
 FROM --platform=linux/amd64 ${WWE}
 
 ARG WOLFRAM_ENGINE_VERSION=15.0
+ARG TOOLKIT_WOLFRAM_VERSION=v1.1.0
 
 ENV LOG_FORMAT="production"
 
@@ -29,6 +30,15 @@ WORKDIR /app
 
 # add wstp server to path
 ENV PATH=$PATH:/usr/local/Wolfram/WolframEngine/${WOLFRAM_ENGINE_VERSION}/SystemFiles/Links/WSTPServer
+
+# add the shared Wolfram evaluation-function toolkit (JSON comms layer),
+# used by all Wolfram-based evaluation functions via PacletDirectoryLoad.
+RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+RUN git clone --branch ${TOOLKIT_WOLFRAM_VERSION} --depth 1 \
+      https://github.com/lambda-feedback/toolkit-wolfram.git /opt/lambda-feedback/toolkit-wolfram
+
+ENV LF_TOOLKIT_PATH="/opt/lambda-feedback/toolkit-wolfram"
 
 # add shimmy
 COPY --from=shimmy /shimmy /usr/local/bin/shimmy
