@@ -40,6 +40,15 @@ RUN git clone --branch ${TOOLKIT_WOLFRAM_VERSION} --depth 1 \
 
 ENV LF_TOOLKIT_PATH="/opt/lambda-feedback/toolkit-wolfram"
 
+# Every Wolfram evaluation function follows the same shape: an evaluate.m
+# and preview.m providing evaluate`EvaluationFunction / preview`PreviewFunction.
+# Bootstrap.wl (shipped by toolkit-wolfram, cloned above) is the one fixed
+# entry point that wires those into the toolkit's ServeEvaluationFunction --
+# evaluation function repos only need to COPY their evaluate.m/preview.m
+# into WORKDIR, not their own entry script.
+ENV FUNCTION_COMMAND="wolframscript"
+ENV FUNCTION_ARGS="-f,/opt/lambda-feedback/toolkit-wolfram/Bootstrap.wl"
+
 # add shimmy
 COPY --from=shimmy /shimmy /usr/local/bin/shimmy
 
