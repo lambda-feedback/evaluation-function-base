@@ -1,5 +1,5 @@
 ARG DEBIAN_VERSION=bookworm
-ARG SHIMMY_VERSION=feature-chat
+ARG SHIMMY_VERSION=feature-socket
 ARG PYTHON_VERSION=3.11
 
 FROM ghcr.io/lambda-feedback/shimmy:${SHIMMY_VERSION} AS shimmy
