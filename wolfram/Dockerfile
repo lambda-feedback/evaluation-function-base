@@ -21,7 +21,7 @@ RUN case $(uname -m) in \
 FROM --platform=linux/amd64 ${WWE}
 
 ARG WOLFRAM_ENGINE_VERSION=15.0
-ARG TOOLKIT_WOLFRAM_VERSION=v1.1.0
+ARG TOOLKIT_WOLFRAM_VERSION=v1.2.0
 
 ENV LOG_FORMAT="production"
 
