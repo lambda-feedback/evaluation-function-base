@@ -1,8 +1,12 @@
 name: Create Release
 
 on:
-  repository_dispatch:
-    types: [release]
+  workflow_dispatch:
+    inputs:
+      shimmy_version:
+        description: "Shimmy version to release (e.g. v0.0.6). Leave blank to use the latest shimmy release."
+        required: false
+        type: string
 
 jobs:
   release:
@@ -14,9 +18,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Resolve shimmy version
+        id: shimmy
+        env:
+          SHIMMY_VERSION: ${{ inputs.shimmy_version }}
+        run: |
+          if [ -z "$SHIMMY_VERSION" ]; then
+            SHIMMY_VERSION=$(curl -sL \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/repos/lambda-feedback/shimmy/releases/latest \
+              | jq -r .tag_name)
+          fi
+          echo "version=$SHIMMY_VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.event.client_payload.shimmy_version }}
-          name: "Shimmy ${{ github.event.client_payload.shimmy_version }}"
+          tag_name: ${{ steps.shimmy.outputs.version }}
+          name: "Shimmy ${{ steps.shimmy.outputs.version }}"
           generate_release_notes: true
